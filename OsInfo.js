@@ -14,11 +14,14 @@ const getOSinformation = () => {
     architechure: os.arch(), 
     homedir: os.homedir(), 
   }
-  return osInfo;
+  //return osInfo;
+  return new Promise((resolve,reject)=>{
+    resolve(osInfo);
+  })
 }
 
-const writeOSinfo = () => {
-  const osInfo = getOSinformation();
+const writeOSinfo = async () => {
+  const osInfo = await getOSinformation();
   const {homedir} = osInfo;
   fs.writeFileSync(
     path.join(homedir+'/'+process.env.FILE_DIRECTORY+'/'+process.env.FILE_NAME), 
